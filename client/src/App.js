@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Switch, Route } from 'react-router-dom';
 import './App.css';
+import Register from './components/Register.js';
 
 class App extends Component {
   render() {
