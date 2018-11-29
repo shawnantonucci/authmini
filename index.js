@@ -118,7 +118,7 @@ server.post('/api/register', (req, res) => {
     .then(ids => {
       res.status(201).json(ids);
     })
-    .catch(err => json(err));
+    .catch(err => res.status(400).json(err));
 });
 
 server.get('/', (req, res) => {

@@ -8,7 +8,7 @@ const initialUser = {
   password: '',
 };
 
-export default class Register extends Component {
+export default class Login extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -24,11 +24,12 @@ export default class Register extends Component {
 
   submitHandler = (event) => {
     event.preventDefault();
-    axios.post(`${url}/api/register`, this.state.user)
+    axios.post(`${url}/api/login`, this.state.user)
       .then((res) => {
-        if (res.status === 201) {
+        if (res.status === 200 && res.data) {
+          localStorage.setItem('secret_bitcoin_token', res.data.token);
           this.setState({
-            message: 'Registration successful',
+            message: 'Login successful',
             user: { ...initialUser },
           });
         } else {
@@ -37,7 +38,7 @@ export default class Register extends Component {
       })
       .catch((err) => {
         this.setState({
-          message: 'Registration failed.',
+          message: 'Authentication failed.',
           user: { ...initialUser },
         });
       });
